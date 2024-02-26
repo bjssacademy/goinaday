@@ -8,7 +8,7 @@ Go is syntactically similar to C, but with memory safety, garbage collection, st
 
 The language is often referred to as Golang because of its domain name, golang.org, but the proper name is Go.
 
-![](img%5Cgoinaday1.png)
+![](img/goinaday1.png)
 
 ## Whut?
 
@@ -55,13 +55,13 @@ NOTE: We used the old Go playground and are updating the pictures, but the conte
 
 https://goplay.tools/ 
 
-![](img%5Cgoinaday3.png)
+![](img/goinaday3.png)
 
 ---
 
 ## Hello Learner!
 
-![](img%5Cgoinaday4.png)
+![](img/goinaday4.png)
 
 [Click here to see the code](https://goplay.tools/snippet/UTfp9e_aAbd)
 
@@ -90,7 +90,7 @@ We'll talk more about packages later. For now, while we focus on understanding t
 
 Go has a number of built-in functions, such as `Println`, which can be used without reference. We can't get very far though, without making use of Go's standard library and eventually using third-party libraries. In Go, the `import` keyword is used to declare the packages that are used by the code in the file.
 
-![](img%5Cgoinaday5.png)
+![](img/goinaday5.png)
 
 [Click here to see the code in the Go Playground](https://goplay.tools/snippet/fairSSz2PXW)
 
@@ -115,7 +115,7 @@ You might be thinking *Woah! What can be so complicated about this?* 
 
 Let's start looking at some examples:
 
-![](img%5Cgoinaday6.png)
+![](img/goinaday6.png)
 
 [Code here](https://goplay.tools/snippet/8oQwThFogpS)
 
@@ -150,7 +150,7 @@ You don't have to use the `var` keyword when using it.
 
 It's important that you remember that `:=` is used to *declare* the variable as well as *assign* a value to it. Why? Because a variable can't be declared twice (not in the same scope anyway). If you try to run the following, you'll get an error.
 
-![](img%5Cgoinaday7.png)
+![](img/goinaday7.png)
 
 [Code here](https://goplay.tools/snippet/DxwHGSSZWpZ )
 
@@ -180,7 +180,7 @@ The basic `for` loop has three components separated by semicolons:
 - **the condition expression**: evaluated before every iteration
 - **the post statement**: executed at the end of every iteration
 
-![](img%5Cgoinaday8.png)
+![](img/goinaday8.png)
 
 [Code here](https://goplay.tools/snippet/TeaO0Yxt95g )
 
@@ -194,7 +194,7 @@ The loop will stop iterating once the boolean condition evaluates to false.
 
 Go's `if` statements are like its `for` loops; the expression need not be surrounded by parentheses `( )` but the braces `{ }` **are** required.
 
-![](img%5Cgoinaday9.png)
+![](img/goinaday9.png)
 
 [Code here](https://goplay.tools/snippet/UA6GTDP13YG )
 
@@ -204,7 +204,7 @@ If you come from Python, Ruby, Perl, JavaScript or PHP (and more), you're probab
 
 In Go, like many other languages, arrays are *fixed*. Declaring an array requires that we specify the size, and once the size is specified, it cannot grow.
 
-![](img%5Cgoinaday10.png)
+![](img/goinaday10.png)
 
 [Code here](https://goplay.tools/snippet/NIMcD_lX8q0 )
 
@@ -232,7 +232,7 @@ In Go, you rarely, if ever, use arrays directly. Instead, you use *slices*. A sl
 ```
  Unlike the array declaration, our slice isn't declared with a length within the square brackets.
 
-![](img%5Cgoinaday11.png)
+![](img/goinaday11.png)
 
 [Code here](https://goplay.tools/snippet/xcMbUbQTx8B)
 
@@ -256,7 +256,7 @@ Appending to a slice of length 0 will set the first element, as the slice we mad
 
 How large can we resize a slice? Up to its capacity which, in this case, is 10. You might be thinking this doesn't actually solve the fixed-length issue of arrays. It turns out that `append` is pretty special. If the underlying array is full, it will create a new larger array and copy the values over (this is exactly how dynamic arrays work in PHP, Python, Ruby, JavaScript, ...). 
 
-![](img%5Cgoinaday12.png)
+![](img/goinaday12.png)
 
 [Code here](https://goplay.tools/snippet/KANWcaYws90)
 
@@ -276,7 +276,7 @@ func plus(a int, b int) int {
 }
 ```
 
-![](img%5Cgoinaday13.png)
+![](img/goinaday13.png)
 
 [Code here](https://goplay.tools/snippet/lqPNF6DBVgX )
 
@@ -286,17 +286,17 @@ You call a function exactly like you'd expect with `functionName(arguments)`.
 
 This is a good time to point out that functions can return multiple values in Go:
 
-![](img%5Cgoinaday14.png)
+![](img/goinaday14.png)
 
 When returning multiple values in Go, the return types must be enclosed in parenthesis `()`;
 
-![](img%5Cgoinaday15.png)
+![](img/goinaday15.png)
 
 ### I only care about one return type
 
 Sometimes, you only care about one of the return values. In these cases, you assign the other values to. This is more than a convention. `_` the *blank identifier* is special in that the return value isn't actually assigned. This lets you use `_` over and over again regardless of the returned type.
 
-![](img%5Cgoinaday16.png)
+![](img/goinaday16.png)
 
 [Code here](https://goplay.tools/snippet/MRJP8ntz47F)
 
@@ -327,7 +327,7 @@ Sometimes, you only care about one of the return values. In these cases, you ass
 
 Although Go doesn't do OO like you may be used to, you'll notice a lot of similarities between the definition of a *structure* and that of a *class*. A simple example is the following `Source` structure:
 
-![](img%5Cgoinaday17.png)
+![](img/goinaday17.png)
 
 
 Go isn't an object-oriented (OO) language like C++, Java, Ruby and C#. It doesn't have objects nor inheritance and thus, doesn't have the many concepts associated with OO such as polymorphism and overloading.
@@ -341,7 +341,7 @@ When we first looked at variables and declarations, we looked only at built-in t
 
 The simplest way to create a value of our structure is below.
 
-![](img%5Cgoinaday18.png)
+![](img/goinaday18.png)
 
 [Code here](https://go.dev/play/p/xOQ8J-jzB9m)
 
@@ -351,7 +351,7 @@ Note: The trailing `,` in the above structure when we give it values on intia
 
 We don't have to set all or even any of the fields. Both of these are valid:
 
-![](img%5Cgoinaday19.png)
+![](img/goinaday19.png)
 
 [Code here](https://go.dev/play/p/R_DWHlrQCsd)
 
@@ -371,13 +371,13 @@ Why do we want a pointer to the value, rather than the actual value? It comes do
 
 Knowing this, what does the following print:
 
-![](img%5Cgoinaday20.png)
+![](img/goinaday20.png)
 
 The answer is 9000, not 19000. Why? Because Super made changes to a *copy* of our original source value and thus, changes made in Super weren't reflected in the caller. To make this work as you probably expect, we need to pass a pointer to our value.
 
 ## Pointers
 
-![](img%5Cgoinaday21.png)
+![](img/goinaday21.png)
 
 We made two changes. The first is the use of the `&` operator to get the address of our value (it's called the *address of* operator). Next, we changed the type of parameter `Super` expects. It used to expect a value of type `Source` but now expects an address of type `*Source`, where `*X` means pointer to value of type X. There's obviously some relation between the types `Source` and `*Source`, but they are two distinct types.
 
@@ -428,17 +428,17 @@ Here is [an example](https://goplay.tools/snippet/wwt4TpEXYn1) of passing a valu
 
 Structures don't have constructors. Instead, you create a function that returns an instance of the desired type (like a factory):
 
-![](img%5Cgoinaday24.png)
+![](img/goinaday24.png)
 
 Our factory doesn't have to return a pointer; this is absolutely valid:
 
-![](img%5Cgoinaday23.png)
+![](img/goinaday23.png)
 
 ## Methods
 
 Go supports *methods* defined on struct types:
 
-![](img%5Cgoinaday25.png)
+![](img/goinaday25.png)
 
 The area method has a *receiver type* of `*rect`:
 
@@ -454,7 +454,7 @@ Methods can be defined for either pointer or value receiver types. The `perim` m
 
 Here we call the 2 methods defined for our struct.
 
-![](img%5Cgoinaday26.png)
+![](img/goinaday26.png)
 
 Go automatically handles conversion between values and pointers for method calls. You may want to use a pointer receiver type to avoid copying on method calls or to allow the method to mutate the receiving struct.
 
@@ -489,7 +489,7 @@ Example input might be: `[10, 5, 3,100,99, 12, 9, 1, 4, 35, 21]​`
 Maps in Go are what other languages call hashtables or dictionaries. They work as you expect: you define a key and value, and can get, set and delete values from it.
 Maps, like slices, can be created with the `make` function. 
 
-![](img%5Cgoinaday27.png)
+![](img/goinaday27.png)
 
 [Code here](https://go.dev/play/p/yRUAZAjpCr7)
 
@@ -508,7 +508,7 @@ lookup := map[string]int{}
 
 We can iterate over a map using a for loop combined with the `range` keyword:
 
-![](img%5Cgoinaday28.png)
+![](img/goinaday28.png)
 
 [Code here](https://go.dev/play/p/cvwftQosOvM)
 
@@ -518,7 +518,7 @@ So we have the `for` keyword, then the `key` (or index) and `value` variables th
 
 `range` iterates over elements in a variety of data structures. Let’s see how to use `range` with some of the data structures we’ve already learned:
 
-![](img%5Cgoinaday29.png)
+![](img/goinaday29.png)
 
 > Here we use range to sum the numbers in a slice. Arrays work like this too.
 
@@ -534,7 +534,7 @@ Sometimes we actually want the indexes though!
 
 In Go it’s idiomatic to communicate errors via an explicit, separate return value. This contrasts with the exceptions used in languages like Java and Ruby and the overloaded single result / error value sometimes used in C. Go’s approach makes it easy to see which functions return errors and to handle them using the same language constructs employed for any other, non-error tasks.
 
-![](img%5Cgoinaday30.png)
+![](img/goinaday30.png)
 
 [Code here](https://go.dev/play/p/vcpKA8tPKFl)
 
@@ -547,7 +547,7 @@ https://go.dev/blog/error-handling-and-go
 
 We can create our own errors by importing the `errors` package and using it as a return type on a function:
 
-![](img%5Cgoinaday31.png)
+![](img/goinaday31.png)
 
 [Code here](https://go.dev/play/p/2C2BmAlqt02)
 
@@ -595,7 +595,7 @@ Install the VS Code Go extension:
 
 Create `main.go`. For now, you can save it anywhere you want; we don't need to live inside Go's workspace for trivial examples.
 
-![](img%5Cgoinaday33.png)
+![](img/goinaday33.png)
 
 > `println` is not `Println` and needs no import – that’s because println is part of the runtime of Go, and may be removed in future. 
 
@@ -611,7 +611,7 @@ Most programs written in Go follow the same formatting rules, namely a tab is us
 
 When you're inside a project, you can apply the formatting rule to it and all sub-projects via:
 
-![](img%5Cgoinaday34.png)
+![](img/goinaday34.png)
 
 Give it a try. It does more than indent your code; it also aligns field declarations and alphabetically orders imports.
 
@@ -629,7 +629,7 @@ Give it a try. It does more than indent your code; it also aligns field declarat
 
 3. Open a new Terminal and run `go mod init store`
 
-![](img%5Cgoinaday35.png)
+![](img/goinaday35.png)
 
 
 To keep more complicated libraries and systems organized, we need to learn about packages. 
@@ -648,11 +648,11 @@ This will become very important shortly about how Go finds its packages
 
 Create a new folder under your base folder  (for me _GoInADay_ referenced as the module  _store_  in `go.mod`) called `shopping` and a subfolder within it called `db`:
 
-![](img%5Cgoinaday37.png)
+![](img/goinaday37.png)
 
 Inside of  __shopping/__  __db__ , create a file called  __db.go__  __ __ and add the following code:
 
-![](img%5Cgoinaday36.png)
+![](img/goinaday36.png)
 
 In Go, package names follow the directory structure of your Go workspace. If we were building a shopping system, we'd probably start with a package name "shopping" and put our source files in `/shopping/`.
 
@@ -667,7 +667,7 @@ Notice that the name of the package is the same as the name of the folder. Also,
 
 Now, create a file called `pricecheck.go` inside of the main shopping folder.
 
-![](img%5Cgoinaday38.png)
+![](img/goinaday38.png)
 
 
 You’ll see here that we need to refer to the fully-qualified path from the module root (GoInADay folder) up to the `db` package. This is what you have to remember about modules!
@@ -676,7 +676,7 @@ It's tempting to think that importing `shopping/db` is somehow special because
 
 ## You still need a `main()`…
 
-![](img%5Cgoinaday39.png)
+![](img/goinaday39.png)
 
 If you're building a package, you don't need anything more than what we've seen. To build an executable, you still need a main. I added mine to the root, but other prefer to create a folder – for instance named shopping – and put it in there.
 
@@ -692,7 +692,7 @@ This also applies to structure fields. If a structure field name starts with a l
 
 For example, if our `db.go` file had a function that looked like:
 
-![](img%5Cgoinaday40.png)
+![](img/goinaday40.png)
 
 it could be called via `db.NewItem()`. But if the function was named `newItem`, we wouldn't be able to access it from a different package.
 
@@ -707,7 +707,7 @@ Go ahead and change the name of the various functions, types and fields from the
 * We just talked about how to import packages that live in our workspace. To use our newly gotten go-sqlite3 package, we'd import it like so:
 * I know this looks like a URL but in reality, it'll simply import the go-sqlite3 package which it expects to find in $module/github.com/mattn/go-sqlite3.
 
-![](img%5Cgoinaday41.png)
+![](img/goinaday41.png)
 
 # Go Mod Tidy
 
@@ -715,7 +715,7 @@ Go ahead and change the name of the various functions, types and fields from the
   * Download all the dependencies that are required in your source files and update  __go.mod__  file with that dependency.
   * Remove all dependencies from the go.mod file which are not required in the source files.
 
-![](img%5Cgoinaday42.png)
+![](img/goinaday42.png)
 
 ---
 
@@ -725,7 +725,7 @@ Go ahead and change the name of the various functions, types and fields from the
 
 # Variadic Parameters
 
-![](img%5Cgoinaday43.png)
+![](img/goinaday43.png)
 
 ---
 
@@ -737,7 +737,7 @@ Must be last in the argument list. Cannot have variadic first, must be last and 
 
 # Unfurling Slices
 
-![](img%5Cgoinaday44.png)
+![](img/goinaday44.png)
 
 ---
 
@@ -747,7 +747,7 @@ If you’ve done some JS, you will have seen this!
 
 Anonymous functions can be declared inside other functions
 
-![](img%5Cgoinaday45.png)
+![](img/goinaday45.png)
 
 Note in the first one we do not have to provide a param to it.
 
@@ -757,31 +757,31 @@ In the second, we do.
 
 Function named wtf which has no parameters, returns an anonymous function which has no parameters that returns a string.
 
-![](img%5Cgoinaday46.png)
+![](img/goinaday46.png)
 
 The important thing about currying is the function returns a function *and* a return type
 
 
 ## Implementing Interfaces
 
-![](img%5Cgoinaday47.png)
+![](img/goinaday47.png)
 
 Okay, first thing you’ll notice is again….this isn’t Java
 
 Implementing interfaces is not done the same way – there appears to be no relation between our structs and our interface…
 
-![](img%5Cgoinaday48.png)
+![](img/goinaday48.png)
 
 We have to create a function with a receiver of the type of struct for each with the EXACT name and return type declared in our interface. 
 Go doesn’t care, this is just how it is…
 
 We create a list of Employees in main, let’s follow along as to what happens….
 
-![](img%5Cgoinaday50.png)
+![](img/goinaday50.png)
 
 ## Structural vs Nominative Polymorphism
 
-![](img%5Cgoinaday49.png)
+![](img/goinaday49.png)
 
 ## Redo!
 
@@ -809,7 +809,7 @@ Each element of array A is a string that can have one of the following values: C
 
 A goroutine is similar to a thread, but it is scheduled by Go, not the OS. Code that runs in a goroutine can run concurrently with other code. Let's look at an example.
 
-![](img%5Cgoinaday53.png)
+![](img/goinaday53.png)
 
 There are a few interesting things going on here, but the most important is how we start a goroutine. We simply use the go keyword followed by the function we want to execute. If we just want to run a bit of code, such as the above, we can use an anonymous function. Do note that anonymous functions aren't only used with goroutines, however.
 
@@ -827,7 +827,7 @@ Channels help make concurrent programming saner by taking shared data out of the
 
 The final thing to know before we move on is that receiving and sending to and from a channel is  __blocking__ . That is, when we receive from a channel, execution of the goroutine won't continue until data is available. Similarly, when we send to a channel, execution won't continue until the data is received.
 
-![](img%5Cgoinaday54.png)
+![](img/goinaday54.png)
 
 ---
 
