@@ -773,30 +773,15 @@ Implementing interfaces is not done the same way – there appears to be no rela
 ![](img%5Cgoinaday48.png)
 
 We have to create a function with a receiver of the type of struct for each with the EXACT name and return type declared in our interface. 
-Go doesn’t care, this is just how it is….
-
-## Structural vs Nominative Polymorphism
-
-
-
-Okay, first thing you’ll notice is again….this isn’t Java
-
-![](img%5Cgoinaday49.png)
-
-Implementing interfaces is not done the same way – there appears to be no relation between our structs and our interface….. (click)
-
-We have to create a function with a receiver of the type of struct for each with the EXACT name and return type declared in our interface. Go doesn’t care, this is just how it is….
-
-![](img%5Cgoinaday50.png)
-
-
-Now we have that, we can utilise a single function to accept the interface (Employee) and operate on ONLY interface defined functions
-
-![](img%5Cgoinaday51.png)
+Go doesn’t care, this is just how it is…
 
 We create a list of Employees in main, let’s follow along as to what happens….
 
-![](img%5Cgoinaday52.png)
+![](img%5Cgoinaday50.png)
+
+## Structural vs Nominative Polymorphism
+
+![](img%5Cgoinaday49.png)
 
 ## Redo!
 
