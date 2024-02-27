@@ -61,17 +61,21 @@ https://goplay.tools/
 
 ## Hello Learner!
 
+Change the string `hello world` to be `Hello, Learner`:
+
 ![](img/goinaday4.png)
 
 [Click here to see the code](https://goplay.tools/snippet/UTfp9e_aAbd)
 
 Click the `Run` button to execute the code.
 
-> fmt is the format package
-
 ---
 
-Hopefully, the code that we just executed is understandable. We've created a function and printed out a string with the built-in `Println` function. 
+Hopefully, the code that we just executed is understandable. We've got a function named `main` and printed out a string with the `Println` function. 
+
+The `Println` function is available from the `fmt` *package* that we import.
+
+---
 
 Saying that a language has a C-like syntax means that if you're used to any other C-like languages such as C, C++, Java, JavaScript and C#, then you're going to find Go familiar -- superficially, at least. For example, it means:
 - `&&` is used as a boolean AND, 
@@ -90,7 +94,31 @@ We'll talk more about packages later. For now, while we focus on understanding t
 
 Go has a number of built-in functions, such as `Println`, which can be used without reference. We can't get very far though, without making use of Go's standard library and eventually using third-party libraries. In Go, the `import` keyword is used to declare the packages that are used by the code in the file.
 
-![](img/goinaday5.png)
+```go
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+
+	// `os.Args` provides access to raw command-line
+	// arguments. Note that the first value in this slice
+	// is the path to the program, and `os.Args[1:]`
+	// holds the arguments to the program.
+	argsWithProg := os.Args
+	argsWithoutProg := os.Args[1:]
+
+	// You can get individual args with normal indexing.
+	//arg := os.Args[3]
+
+	fmt.Println(argsWithProg)
+	fmt.Println(argsWithoutProg)
+	//fmt.Println(arg)
+}
+```
 
 [Click here to see the code in the Go Playground](https://goplay.tools/snippet/fairSSz2PXW)
 
@@ -109,14 +137,35 @@ Another thing to note is that Go's standard library is well documented. You can 
 
 It'd be nice to begin and end our look at variables by saying you declare and assign to a variable by doing `x = 4`.
 
-Unfortunately, things are more complicated in Go. We'll begin our conversation by looking at simple examples. Then, in the next chapter, we'll expand this when we look at creating and using structures. Still, it'll probably take some time before you truly feel comfortable with it.
+Unfortunately, things are more complicated in Go. We'll begin our conversation by looking at simple examples. Then, in the next section, we'll expand this when we look at creating and using structures. Still, it'll probably take some time before you truly feel comfortable with it.
 
 You might be thinking *Woah! What can be so complicated about this?* 
 
 Let's start looking at some examples:
 
-![](img/goinaday6.png)
+```go
+package main
 
+import (
+	"fmt"
+)
+
+func main() {
+	var power int
+	power = 9000
+	fmt.Printf("It's over %d\n", power)
+	
+	//We can merge the first two lines:
+	var short_power int = 9000
+	
+	//Go has a handy short variable declaration operator, :=, which can infer the type:
+	shortest_power := 9000
+	
+	//You can also declare multiple variables at once
+	var power1, power2 int = 1, 2
+	
+}
+```
 [Code here](https://goplay.tools/snippet/8oQwThFogpS)
 
 The most explicit way to deal with variable declaration and assignment in Go is also the most verbose.
@@ -138,7 +187,7 @@ Creates a variable named `a` infers the type as `string` from the value `"initia
 >
 > You CANNOT do this in Go. Once you have declared a variable as a type - even if the type has been inferred - you cannot give it another value that is of another type.
 
-The last example is the one you will see most often used in Go, and is known as the short assignment operator `:=` :
+The last example is the one you will see most often used in Go, and is known as the *short assignment operator* `:=` :
 
 ```go
 f := apple
@@ -150,8 +199,22 @@ You don't have to use the `var` keyword when using it.
 
 It's important that you remember that `:=` is used to *declare* the variable as well as *assign* a value to it. Why? Because a variable can't be declared twice (not in the same scope anyway). If you try to run the following, you'll get an error.
 
-![](img/goinaday7.png)
 
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	power := 1000
+	fmt.Printf("default power is %d\n", power)
+
+	name, power := "Goku", 9000
+	fmt.Printf("%s's power is over %d\n", name, power)
+}
+```
 [Code here](https://goplay.tools/snippet/DxwHGSSZWpZ )
 
 The compiler will complain with `no new variables on left side of :=`. This means that when we first declare a variable, we use `:=` but on subsequent assignment, we use the assignment operator `=`. This makes a lot of sense, but it can be tricky for your muscle memory to remember when to switch between the two.
@@ -162,7 +225,7 @@ For now the last thing to know is that, like imports, Go **won't** let you have 
 
 #### A Quick Note
 
-The short assignment operator `:=` can only be used inside a function!
+The short assignment operator `:=` can only be used inside a function! To declare it at the package level, you must use `var`.
 
 It’s semantically the same as
 
@@ -180,8 +243,43 @@ The basic `for` loop has three components separated by semicolons:
 - **the condition expression**: evaluated before every iteration
 - **the post statement**: executed at the end of every iteration
 
-![](img/goinaday8.png)
+```go
+package main
 
+import (
+	"fmt"
+)
+
+func main() {
+
+	//most baic type with a single condition
+  i := 1
+	for i <= 3 {
+		fmt.Println(i)
+		i = i + 1
+	}
+
+  //classic initial/condition/after loop
+	for j := 7; j <= 9; j++ {
+		fmt.Println(j)
+	}
+
+  //infinite loop!
+	for {
+		fmt.Println("loop")
+		break
+	}
+
+  //continue to next iteration of the loop
+	for n := 0; n <= 5; n++ {
+		if n%2 == 0 {
+			continue
+		}
+		fmt.Println(n)
+	}
+}
+
+```
 [Code here](https://goplay.tools/snippet/TeaO0Yxt95g )
 
 The init statement will often be a short variable declaration, and the variables declared there are visible only in the scope of the `for` statement.
@@ -194,8 +292,31 @@ The loop will stop iterating once the boolean condition evaluates to false.
 
 Go's `if` statements are like its `for` loops; the expression need not be surrounded by parentheses `( )` but the braces `{ }` **are** required.
 
-![](img/goinaday9.png)
+```go
+func main() {
 
+    //basic example
+	if 7%2 == 0 {
+		fmt.Println("7 is even")
+	} else {
+		fmt.Println("7 is odd")
+	}
+
+    //without else
+	if 8%4 == 0 {
+		fmt.Println("8 is divisible by 4")
+	}
+
+    //else if; any variables declared in this statement are available in all branches so be careful!
+	if num := 9; num < 0 {
+		fmt.Println(num, "is negative")
+	} else if num < 10 {
+		fmt.Println(num, "has 1 digit")
+	} else {
+		fmt.Println(num, "has multiple digits")
+	}
+}
+```
 [Code here](https://goplay.tools/snippet/UA6GTDP13YG )
 
 ## Arrays
@@ -343,7 +464,7 @@ The simplest way to create a value of our structure is below.
 
 ![](img/goinaday18.png)
 
-[Code here](https://go.dev/play/p/xOQ8J-jzB9m)
+[Code here](https://goplay.tools/snippet/xOQ8J-jzB9m)
 
 Note: The trailing `,` in the above structure when we give it values on intialisation is required. Without it, the compiler will give an error. You'll appreciate the required consistency, especially if you've used a language or format that enforces the opposite.
 
@@ -353,7 +474,7 @@ We don't have to set all or even any of the fields. Both of these are valid:
 
 ![](img/goinaday19.png)
 
-[Code here](https://go.dev/play/p/R_DWHlrQCsd)
+[Code here](https://goplay.tools/snippet/R_DWHlrQCsd)
 
 Just like unassigned variables have a zero value, so do fields.
 Furthermore, you can skip the field name and rely on the order of the field declarations (though for the sake of clarity, you should only do this for structures with few fields):
@@ -458,21 +579,21 @@ Here we call the 2 methods defined for our struct.
 
 Go automatically handles conversion between values and pointers for method calls. You may want to use a pointer receiver type to avoid copying on method calls or to allow the method to mutate the receiving struct.
 
-[Code here](https://go.dev/play/p/Ep45Ns3yTlN)
+[Code here](https://goplay.tools/snippet/Ep45Ns3yTlN)
 
 ## Quick Lab
 
-Create a  __struct__  for a Circle that has  __diameter__  and  __radius__  as properties of type `int`
+Create a struct for a Circle that has diameter and radius as properties of type `int`
 
-Implement  __methods__  to return the  __circumference__  and the  __area__  of the circle
+Implement methods to return the circumference and the area of the circle
 
 ## STRUCTS & METHODS - Extended Lab
 
-Create a  __struct__  for a Circle that has  __diameter__  and  __radius__  as properties of type int​
+Create a struct for a Circle that has diameter and radius as properties of type int​
 
-Implement  __methods__  to return the  __circumference__  and the  __area__  of the circle​
+Implement methods to return the circumference and the area of the circle​
 
-Create a  __function__  that accepts a slice of  _ints_  that represent the radius of the Circle, and return a slice of Circle, ordered by the circumference of the Circle​
+Create a function that accepts a slice of  _ints_  that represent the radius of the Circle, and return a slice of Circle, ordered by the circumference of the Circle​
 
 Example input might be: `[10, 5, 3,100,99, 12, 9, 1, 4, 35, 21]​`
 
@@ -491,7 +612,7 @@ Maps, like slices, can be created with the `make` function. 
 
 ![](img/goinaday27.png)
 
-[Code here](https://go.dev/play/p/yRUAZAjpCr7)
+[Code here](https://goplay.tools/snippet/yRUAZAjpCr7)
 
 To get the number of keys, we use len. To remove a value based on its key, we use delete
 
@@ -510,7 +631,7 @@ We can iterate over a map using a for loop combined with the `range` keyword
 
 ![](img/goinaday28.png)
 
-[Code here](https://go.dev/play/p/cvwftQosOvM)
+[Code here](https://goplay.tools/snippet/cvwftQosOvM)
 
 So we have the `for` keyword, then the `key` (or index) and `value` variables that wil be assigned to on each iteration of the loop, the short assignment operator `:=`, and then the keyword `range` and our iterable (array, slice, map etc) variable `lookup`.
 
@@ -528,7 +649,7 @@ Above we didn’t need the `index`, so we ignored it with the blank identifier 
 
 Sometimes we actually want the indexes though!
 
-[More examples of range here](https://go.dev/play/p/CzyQe5jWaC-)
+[More examples of range here](https://goplay.tools/snippet/CzyQe5jWaC-)
 
 ## Errors
 
@@ -536,7 +657,7 @@ In Go it’s idiomatic to communicate errors via an explicit, separate return va
 
 ![](img/goinaday30.png)
 
-[Code here](https://go.dev/play/p/vcpKA8tPKFl)
+[Code here](https://goplay.tools/snippet/vcpKA8tPKFl)
 
 https://pkg.go.dev/strconv
 
@@ -549,7 +670,7 @@ We can create our own errors by importing the `errors` package and using it as
 
 ![](img/goinaday31.png)
 
-[Code here](https://go.dev/play/p/2C2BmAlqt02)
+[Code here](https://goplay.tools/snippet/2C2BmAlqt02)
 
 ---
 
@@ -580,8 +701,8 @@ Create an in-memory key value store.
 * [https://go.dev/doc/install](https://go.dev/doc/install)
 * Open the MSI file you downloaded and follow the prompts to install Go. By default, the installer will install Go to Program Files or Program Files (x86). You can change the location as needed. After installing, you will need to close and reopen any open command prompts so that changes to the environment made by the installer are reflected at the command prompt.
 * Verify that you've installed Go.
-  * In  __Windows__ , click the  __Start__  menu.
-  * In the menu's search box, type  __cmd__ , then press the  __Enter__  key.
+  * In Windows, click the Start menu.
+  * In the menu's search box, type cmd, then press the Enter key.
   * In the Command Prompt window that appears, type the following command: `go version`
   * Confirm that the command prints the installed version of Go.
 
@@ -650,7 +771,7 @@ Create a new folder under your base folder  (for me _GoInADay_ referenced as the
 
 ![](img/goinaday37.png)
 
-Inside of  __shopping/__  __db__ , create a file called  __db.go__  __ __ and add the following code:
+Inside of shopping/db, create a file called db.go and add the following code:
 
 ![](img/goinaday36.png)
 
@@ -700,22 +821,26 @@ Go ahead and change the name of the various functions, types and fields from the
 
 ## Package Management
 
-* The go command we've been using to run and build has a get subcommand which is used to fetch third-party libraries. go get supports various protocols but for this example, we'll be getting a library from Github.
+* The go command we've been using to run and build has a get subcommand which is used to fetch third-party libraries. `go get` supports various protocols but for this example, we'll be getting a library from Github.
+
 * From a shell/command prompt, enter:
-  * go get github.com/mattn/go-sqlite3
-* __go get __ fetches the remote files and stores them in your workspace. Go ahead and check your $GOPATH/src. In addition to the shopping project that we created, you'll now see a  __github.com __ folder. Within, you'll see a  __mattn__  folder which contains a  __go-sqlite3 __ folder.
-* We just talked about how to import packages that live in our workspace. To use our newly gotten go-sqlite3 package, we'd import it like so:
-* I know this looks like a URL but in reality, it'll simply import the go-sqlite3 package which it expects to find in $module/github.com/mattn/go-sqlite3.
+  * `go get github.com/mattn/go-sqlite3`
+  * `go get` fetches the remote files and stores them in your workspace. Go ahead and check your $module/src. In addition to the shopping project that we created, you'll now see a `github.com` folder. Within, you'll see a `mattn` folder which contains a `go-sqlite3` folder.
+
+We just talked about how to import packages that live in our workspace. To use our newly gotten go-sqlite3 package, we'd import it like so:
 
 ![](img/goinaday41.png)
 
+I know this looks like a URL but in reality, it'll simply import the go-sqlite3 package which it expects to find in `$module/github.com/mattn/go-sqlite3`.
+
 # Go Mod Tidy
 
-* This command will basically match the  __go.mod__  file with the dependencies required in the source files.
-  * Download all the dependencies that are required in your source files and update  __go.mod__  file with that dependency.
-  * Remove all dependencies from the go.mod file which are not required in the source files.
-
 ![](img/goinaday42.png)
+
+This command will basically match the `go.mod` file with the dependencies required in the source files. You can think of it like `npm install` or `pip install`.
+
+  * Download all the dependencies that are required in your source files and update `go.mod` file with that dependency.
+  * Remove all dependencies from the `go.mod` file which are not required in the source files.
 
 ---
 
@@ -725,29 +850,31 @@ Go ahead and change the name of the various functions, types and fields from the
 
 # Variadic Parameters
 
+Rather than accepting a slice – in this case of int - we might want to accept any amount of ints directly:
+
 ![](img/goinaday43.png)
 
----
+[Code here](https://goplay.tools/snippet/07zjjtCigQX)
 
-Rather than accepting a slice – in this case of int - we might want to accept any amount of ints directly
-
-Must be last in the argument list. Cannot have variadic first, must be last and there can be only one!
-
-
+> NOTE: Your variadic parameter must be last in the argument list. 
+>
+> Cannot have variadic first, must be last and there can be only one!
 
 # Unfurling Slices
 
+If you’ve done some JS, you will have seen this!
+
 ![](img/goinaday44.png)
 
----
-
-If you’ve done some JS, you will have seen this!
+[Code here](https://goplay.tools/snippet/PTfVUcbJC5R)
 
 ## Anonymous Functions
 
-Anonymous functions can be declared inside other functions
+Anonymous functions can be declared inside other functions:
 
 ![](img/goinaday45.png)
+
+[Code here](https://goplay.tools/snippet/g69eS4XV4fd)
 
 Note in the first one we do not have to provide a param to it.
 
@@ -759,31 +886,259 @@ Function named wtf which has no parameters, returns an anonymous function which 
 
 ![](img/goinaday46.png)
 
-The important thing about currying is the function returns a function *and* a return type
+[Code here](https://goplay.tools/snippet/91Zq90R1FdP)
 
+The important thing about currying is the function returns a function *and* a return type!
 
-## Implementing Interfaces
+---
 
-![](img/goinaday47.png)
+# Part 7
+## Interfaces
 
-Okay, first thing you’ll notice is again….this isn’t Java
+> If you have used interfaces before and understand them, feel free to skip to [Implementing Interfaces](#implementing-interfaces-in-go).
+
+Okay, so this is going to be a bit of a leap now. We're going to look at some of the advantages of Object Oriented Programming (OOP) in particular the use of interfaces.
+
+Trying to describe interfaces generally ends up being a talk about abstraction, polymorphism, or decoupling.
+
+We shall now attempt the impossible and try to give examples without using any of those words.
+
+In the pseudocode we are going to use, a `class` is similar to a `struct`.
+
+### The Problem
+
+Let's imagine we have a different types of media - CD, MP3, and Record. They all need different devices to play them.
+
+When we represent this in pseudocode, we can create three separate *classes*:
+
+```
+class CDMedia:
+    method Play():
+        Print "CDPlayer playing..."
+
+class MP3Media:
+    method Play():
+        Print "MP3Player playing..."
+
+class RecordMedia:
+    method Play():
+        Print "RecordPlayer playing..."
+
+```
+
+Now, imagine we are a mythical radio station - Academy FM - that plays new music sent to us in one of these media formats.
+
+When we receive the media, we have to choose what player we need, and press play.
+
+In pseudocode, that might look something like this:
+
+```
+if mediaType == "CD":
+    player = new CDMedia()
+    player.Play()
+
+if mediaType == "MP3":
+    player = new MP3Media()
+    player.Play()
+
+if mediaType == "Record":
+    player = new RecordMedia()
+    player.Play()
+```
+
+And this is fine. It works, and the code's pretty clean and understandable.
+
+Now we want to have a scheduler of when to play these songs overnight when we are in bed, so our nighttime listeners can have some company.
+
+So we want to create a list, or collection of all the songs we want to play, which are all on different media, and then set it off before we leave for the night. Sounds easy right? We just create a list of all the media we want to play and loop round it pressing Play() each time, surely?
+
+Wait - how do we have mixed data types in a list? We've got MP3s, Records and CDs. They all have the same Play() method, but how do we access it?
+
+So we might have a list of songs on media like this:
+
+- Your Song (Record)
+- Bad Habits (MP3)
+- Running Up That Hill (CD)
+- Peggy Sue (Record)
+
+...and many more. But they are all different data types, even though they have the same named methods. We can't, for instance, do this in code:
+
+```
+List<Record> toBePlayed = new List<>(); //create a List of type Record
+
+toBePlayed.Add(new RecordMedia()); //ok, add a record to the List
+
+toBePlayed.Add(new MP3Media()); //won't work - MP3Media is not the same type as needed by the list!
+
+```
+
+> You cannot mix data types in a list like this.
+
+But we have the same method we want in all of them. It shouldn't be this hard? Maybe I can pass three lists in each of the right type and do some randomization of the playlist? Maybe I could provide the list as a list of strings, and do some looping around?
+
+Well, I guess you could, but there is a far easier way: using an interface.
+
+### What's an interface then?
+
+An interface is a contract. It states that all things that use (*implement*) that interface are **guaranteed** to have exactly the methods and properties defined in the interface. <ins>But the interface itself contains no executable code.</ins>
+
+> A good example of how this contract works would be to look at how a franchised business works. Many people patronize specific companies due to “brand recognition”. Think of a large, chain, business near you. Let’s use Starbucks, for example. 
+>
+>Starbucks is well known and has established itself as a trustworthy coffee shop where you are guaranteed to receive a certain level of service and product. Now, if you wanted to open a coffee shop as a small business, would you choose to open an independent coffee shop or would you pay a franchising fee to Starbucks to use their logo and marketing, as well as having to follow their corporate rules and regulations? Well, while an indie coffee shop provides more flexibility, customers may be less willing to patronize your indie shop since the service and product you provide is of an unknown quality and is also subject to change at any time without warning. 
+>
+>A franchised Starbucks location on the other hand, is a known quantity due to your “contract” with the Starbucks corporation. Everyone knows what they’re getting, there are clearly laid out policies for everything including returns, refunds, and other customer satisfaction issues. Starbucks did a lot of the early, difficult, work of creating a brand that customers recognize and trust, you just must follow their corporate rules in order to benefit from that hard work.
+>
+>In our case, the small business owner would be comparable to the class and the Starbucks corporation would be the Interface. The “contract” is the contract that you, as a business owner, sign with the corporation (Starbucks/the Interface) in order to benefit from using their work. Our Interfaces have a set of rules that we must follow, and this, in both business and software development, keeps things nice, tidy, organized, and predictable.
+
+That means that if we have an interface that says *"everything that uses (implements) me MUST have the method Play() available"* then that is a contract or guarantee that the Play() method WILL be available.
+
+When a class uses an interface, we say it *implements* that interface. Any class that *implements* an interface, must, by definition, also implement all the methods and properties defined in the interface.
+
+Enough talk, let's see what an interface might look like:
+
+```
+interface IMedia
+{
+    method Play()
+    method Pause()
+    method Stop()
+}
+
+```
+
+Okay, so to define an interface we use the keyword interface, then the name we want it to have (by convention in many languages, interface names are preceded with a capital I).
+
+Then we have our methods that every implementing class MUST have in order to correctly adhere to the contract.
+
+And to implement an interface in a class:
+
+```
+class MP3Media implements IMedia
+{
+    method Play():
+        Print "MP3Player is playing."
+
+    method Pause():
+        Print "MP3Player is paused."
+
+    method Stop():
+        Print "MP3Player is stopped."
+}
+
+```
+Let's now assume all our classes implement this interface. We can now do something very magical. We can create a List that accepts all the classes that implement that interface:
+
+```
+    List<IMedia> toBePlayed = new List<IMedia>()
+    toBePlayed.Add(new MP3Media())
+    toBePlayed.Add(new CDMedia())
+    toBePlayed.Add(new RecordMedia())
+
+```
+
+And because we know each of those concrete instances MUST implement all of the methods in the interface, we can iterate over that list and for each item access its Play() method, even though each method outputs different results and we don't know exactly what type of media we are playing:
+
+```
+foreach media in toBePlayed:
+  media.Play()
+
+```
+
+Which would output:
+
+```
+MP3Player is playing.
+CDPlayer is playing.
+RecordPlayer is playing.
+```
+---
+## Implementing Interfaces In Go
+
+```go
+type Employee interface {
+	CalculateSalary() int
+}
+
+type Permanent struct {
+	empid         int
+	basicpay      int
+	additionalpay int
+}
+
+type Contract struct {
+	empid    int
+	basicpay int
+}
+```
+
+Okay, first thing you’ll notice is again….this isn’t Java or C# type interfaces you may be used to.
 
 Implementing interfaces is not done the same way – there appears to be no relation between our structs and our interface…
 
-![](img/goinaday48.png)
+```go
+func (p Permanent) CalculateSalary() int {
+	return p.basicpay + p.additionalpay
+}
 
-We have to create a function with a receiver of the type of struct for each with the EXACT name and return type declared in our interface. 
+func (c Contract) CalculateSalary() int {
+	return c.basicpay
+}
+```
+
+We have to create a function with a *receiver of the type of struct* for each with the **EXACT** name and return type declared in our interface, much like we did when creating methods for structs.
+
+By doing this, both the `Permanent` and `Contract` structs are said to *conform* to the interface, and can therefore be treated as a type of `Employee`.
+
 Go doesn’t care, this is just how it is…
 
 We create a list of Employees in main, let’s follow along as to what happens….
 
-![](img/goinaday50.png)
+```go
+func TotalMonthlyCost(e []Employee) {
+	total := 0
+	for _, v := range e {
+		total = total + v.CalculateSalary()
+	}
+	fmt.Printf("Total Monthly Cost: £%d", total)
+}
+
+func main() {
+	perm1 := Permanent{1, 5000, 20}
+	perm2 := Permanent{2, 5000, 50}
+	cont1 := Contract{3, 3000}
+
+	employees := []Employee{perm1, perm2, cont1}
+
+	TotalMonthlyCost(employees)
+}
+```
+
+[Code here](https://goplay.tools/snippet/gr79VBrJW7W)
+
+We create 2 `Permanent` and one `Contract`:
+
+```go
+perm1 := Permanent{1, 5000, 20}
+perm2 := Permanent{2, 5000, 50}
+cont1 := Contract{3, 3000}
+```
+
+So far, everything normal. Then we create a *slice* of type `Employee` - we can add both of these different data types to it because they both conform to all the interface definitions:
+```go
+employees := []Employee{perm1, perm2, cont1}
+```
+
+Now we can call the method defined on both structs (`CalculateSalary`) without having to know the concrete implementation.
 
 ## Structural vs Nominative Polymorphism
 
+For the nerdy amongst you, Go uses *structural polymorphism* which is also known as compile-time polymorphism, and refers to the ability of different types to exhibit certain structural similarities.
+
+*Nominative polymorphism* involves the use of inheritance and subtype relationships to achieve polymorphic behavior. Objects of different types can be treated uniformly through a common supertype or interface. 
+
 ![](img/goinaday49.png)
 
-## Redo!
+## Academy Codility Test - in Go!
 
 A hospital has five departments: Cardiology, Neurology, Orthopaedics, Gynaecology and Oncology. There are N patients, numbered from 0 to N-1, and the K-th of them is in department represented by a string A[K].
 
@@ -799,11 +1154,21 @@ Examples:
 
 Each element of array A is a string that can have one of the following values: Cardiology, Neurology, Orthopaedics, Gynaecology, Oncology.
 
+[Skeleton Code](https://goplay.tools/snippet/aZMrwXuO51k)
+
 ---
 
-# Part 7
+# Part 8
 
-## CONCURRENCY SUPPORT
+## Concurrency in Go
+
+Okay, so if you've got this far we're now getting into some of the very cool and confusing things Go does - concurrency.
+
+When we mention concurrency people tend to think of "running things in parallel", but as Rob Pike points out they are very different in the video below.
+
+Concurrency is about *managing multiple tasks or processes and their interactions effectively*, while parallelism involves actually *executing these tasks simultaneously to improve performance*. Concurrency is often a design consideration, while parallelism is a means of optimizing execution
+
+[Video](https://www.youtube.com/watch?v=oV9rvDllKEg)
 
 ## Goroutines
 
@@ -818,49 +1183,84 @@ Goroutines are easy to create and have little overhead. Multiple goroutines will
 Furthermore, the complexity of mapping and scheduling is hidden. We just say this code should run concurrently and let Go worry about making it happen.
 If we go back to our example, you'll notice that we had to Sleep for a few milliseconds. That's because the main process exits before the goroutine gets a chance to execute (the process doesn't wait until all goroutines are finished before exiting). To solve this, we need to coordinate our code.
 
+### Goroutines Lab
+
+* Ordering experiment
+  * Create 10 goroutines. Make each one print a single, different word. Run all 10. Do this a few times
+  * What do you notice about the order?
+
+---
 
 ## Channels
 
 The challenge with concurrent programming stems from sharing data. If your goroutines share no data, you needn't worry about synchronizing them. That isn't an option for all systems, however. In fact, many systems are built with the exact opposite goal in mind: to share data across multiple requests. An in-memory cache or a database, are good examples of this. This is becoming an increasingly common reality.
 
-Channels help make concurrent programming saner by taking shared data out of the picture. A  __channel__  is a  __communication__  pipe between  __goroutines__  which is used to pass  __data__ . In other words, a goroutine that has data can pass it to another goroutine via a channel. The result is that, at any point in time, only one goroutine has access to the data.
+Channels help make concurrent programming saner by taking shared data out of the picture. A *channel* is a communication pipe between *goroutines* which is used to pass  *data* . In other words, a goroutine that has data can pass it to another goroutine via a channel. The result is that, at any point in time, only one goroutine has access to the data.
 
-The final thing to know before we move on is that receiving and sending to and from a channel is  __blocking__ . That is, when we receive from a channel, execution of the goroutine won't continue until data is available. Similarly, when we send to a channel, execution won't continue until the data is received.
+The final thing to know before we move on is that receiving and sending to and from a channel is **blocking**. That is, when we receive from a channel, execution of the goroutine won't continue until data is available. Similarly, when we send to a channel, execution won't continue until the data is received.
 
 ![](img/goinaday54.png)
 
 ---
 
 Creating goroutines is trivial, and they are so cheap that we can start many; however, concurrent code needs to be coordinated. To help with this problem, Go provides channels. Before we look at channels, I think it's important to understand a little bit about the basics of concurrent programming.
+
 Writing concurrent code requires that you pay specific attention to where and how you read and write values. In some ways, it's like programming without a garbage collector -- it requires that you think about your data from a new angle, always watchful for possible danger.
 
+### Channel Example
+
+[Go Playground Link](https://goplay.tools/snippet/k7nuzRlPg9W)
+
+```go
+jobs := make(chan int, 5)
+results := make(chan int, 5)
+```
+
+Here, we're creating two channels, `jobs` and `results`, both capable of holding up to 5 integer values in their buffers. These channels will be used for communication between the `main` goroutine and the `worker` goroutines.
 
 
-## CHANNELS BASICS Lab
+> That's right, `main` is actually a goroutine itself!
 
-* Ordering experiment
-  * Create 10 goroutines. Make each one print a single, different word. Run all 10. Do this a few times
-  * What do you notice about the order?
-* Channel experiment
-  * Create a goroutine that sends the integers 1 to 10 over a channel. Create another go routine that reads them off and prints them out
-* Worker pool experiment
-  * Modify Channel Experiment. Make three ‘worker’ goroutines read numbers of the channel and print
-  * Run this a few times. Is the order consistent? When might this matter? When might it not matter?
+```go
+    for w := 1; w <= 3; w++ {
+        go worker(w, jobs, results)
+    }
+```
 
-# Part 8: Handling Concurrency
+ Inside each iteration of the for loop, a new goroutine is launched to execute the `worker` function. The `worker` function is called with three arguments: the loop variable `w`, the `jobs` channel, and the `results` channel. 
 
-## Actor model
+ ```go
+    for j := 1; j <= 5; j++ {
+        jobs <- j
+    }
+    close(jobs)
+ ```
 
-## Actor pattern
+Inside each iteration of the for loop, the value of `j` is sent into the `jobs` channel using the send operator `<-`. This means that each integer from 1 to 5 is *sent as a job to be processed by the worker goroutines*.
 
-## Lab 3
+After all jobs have been sent, the `close` function is called on the `jobs` channel. This indicates that *no more values* will be sent on the channel. It's a signal to the `worker` goroutines that they should stop waiting for new jobs AFTER they have finished processing the current ones.
 
-* __OH NOES!__  It turns out that map[string]interface{} is not concurrency safe!
-* So our key value store will corrupt data if we call it concurrently
-* Create an Actor to add concurrency safety to our key-value store which
-  * __put__ ( key, value )
-  * __delete __ ( key )
-  * __read__ ( key ) returns value
-  * __shutdown __ – without losing any work in flight
-* Do not change the key-value store we already have; let the actor manage all calls to it
+```go
+    for a := 1; a <= 5; a++ {
+        fmt.Println("Result:", <-results)
+    }
+```
 
+The `<-` operator is used to receive a value from the `results` channel. This operation **blocks** until a value is available on the channel. Once a value is received, it is printed.
+
+ Now, when you run this code you get an output like:
+
+ ```
+ Worker 3 processing job 1
+Worker 1 processing job 2
+Worker 2 processing job 3
+Worker 3 processing job 5
+Result: 4
+Result: 2
+Result: 6
+Worker 1 processing job 4
+Result: 8
+Result: 10
+ ```
+
+ >NOTE: Your output is likely to be different every time you run it!
