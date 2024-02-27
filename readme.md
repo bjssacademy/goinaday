@@ -1,5 +1,95 @@
 # Go!
 
+<!-- TOC -->
+
+- [Go!](#go)
+    - [What is it?](#what-is-it)
+    - [Whut?](#whut)
+    - [Why use Go?](#why-use-go)
+- [Part 1](#part-1)
+    - [Go Fundamentals](#go-fundamentals)
+    - [Hello Learner!](#hello-learner)
+    - [Imports](#imports)
+    - [Variables & Declarations](#variables--declarations)
+        - [Variable Scope](#variable-scope)
+            - [A Quick Note](#a-quick-note)
+    - [For Loops](#for-loops)
+    - [Flow Control](#flow-control)
+    - [Arrays](#arrays)
+    - [Slices](#slices)
+    - [Reslice & Append](#reslice--append)
+    - [Functions](#functions)
+        - [Functions Can Return Multiple Values](#functions-can-return-multiple-values)
+        - [I only care about one return type](#i-only-care-about-one-return-type)
+- [Lab #1](#lab-1)
+- [Part 2](#part-2)
+    - [Structures, Methods & Pointers](#structures-methods--pointers)
+        - [The Basics](#the-basics)
+    - [Declarations](#declarations)
+    - [Declarations – Part 2](#declarations--part-2)
+        - [Passing By Value](#passing-by-value)
+    - [Pointers](#pointers)
+- [Pointers vs Values](#pointers-vs-values)
+    - [Constructors](#constructors)
+    - [Methods](#methods)
+    - [Quick Lab](#quick-lab)
+    - [STRUCTS & METHODS - Extended Lab](#structs--methods---extended-lab)
+- [Part 3](#part-3)
+    - [Maps, Ranges & Errors](#maps-ranges--errors)
+    - [Maps](#maps)
+    - [Range](#range)
+    - [Errors](#errors)
+    - [Custom Errors](#custom-errors)
+- [Lab #2](#lab-2)
+- [Part 4](#part-4)
+    - [Installing Go](#installing-go)
+    - [Install](#install)
+    - [VS Code Extensions](#vs-code-extensions)
+    - [Running and Building](#running-and-building)
+    - [Formatting](#formatting)
+- [Part 5](#part-5)
+    - [Packages](#packages)
+    - [How do we use our own packages?](#how-do-we-use-our-own-packages)
+    - [Create a DB package](#create-a-db-package)
+    - [Create a Shopping Package](#create-a-shopping-package)
+    - [You still need a `main()`…](#you-still-need-a-main)
+    - [Visibility – or public vs private](#visibility--or-public-vs-private)
+    - [Package Management](#package-management)
+    - [Go Mod Tidy](#go-mod-tidy)
+- [Part 6](#part-6)
+    - [Variadic, Anonymous Functions, Currying](#variadic-anonymous-functions-currying)
+    - [Variadic Parameters](#variadic-parameters)
+        - [Unfurling Slices](#unfurling-slices)
+    - [Anonymous Functions](#anonymous-functions)
+    - [Currying](#currying)
+- [Part 7](#part-7)
+    - [Interfaces](#interfaces)
+        - [The Problem](#the-problem)
+        - [What's an interface then?](#whats-an-interface-then)
+    - [Implementing Interfaces In Go](#implementing-interfaces-in-go)
+    - [Structural vs Nominative Polymorphism](#structural-vs-nominative-polymorphism)
+    - [Academy Codility Test - in Go!](#academy-codility-test---in-go)
+- [Part 8](#part-8)
+    - [Testing](#testing)
+    - [Unit Testing](#unit-testing)
+        - [Fallthrough](#fallthrough)
+        - [t.Fail vs t.Error vs t.FailNow](#tfail-vs-terror-vs-tfailnow)
+        - [Assertions](#assertions)
+    - [Adding Tests In VS Code](#adding-tests-in-vs-code)
+        - [Go doesn't ship your tests](#go-doesnt-ship-your-tests)
+        - [Running Tests](#running-tests)
+    - [Table Tests](#table-tests)
+    - [Lab - Refactor](#lab---refactor)
+- [Part 9 - ADVANCED](#part-9---advanced)
+    - [Concurrency in Go](#concurrency-in-go)
+    - [Goroutines](#goroutines)
+        - [Goroutines Lab](#goroutines-lab)
+    - [Channels](#channels)
+        - [Channel Example](#channel-example)
+- [Solutions](#solutions)
+
+<!-- /TOC -->
+
 ## What is it?
 
 Go is a statically typed, compiled programming language designed at Google by Robert Griesemer, Rob Pike, and Ken Thompson.
@@ -674,7 +764,7 @@ We can create our own errors by importing the `errors` package and using it as
 
 ---
 
-# LAB #2
+# Lab #2
 
 Create an in-memory key value store.
 
@@ -833,7 +923,7 @@ We just talked about how to import packages that live in our workspace. To use o
 
 I know this looks like a URL but in reality, it'll simply import the go-sqlite3 package which it expects to find in `$module/github.com/mattn/go-sqlite3`.
 
-# Go Mod Tidy
+## Go Mod Tidy
 
 ![](img/goinaday42.png)
 
@@ -846,9 +936,9 @@ This command will basically match the `go.mod` file with the dependencies requ
 
 # Part 6
 
-# Variadic, Anonymous Functions, Currying
+## Variadic, Anonymous Functions, Currying
 
-# Variadic Parameters
+## Variadic Parameters
 
 Rather than accepting a slice – in this case of int - we might want to accept any amount of ints directly:
 
@@ -860,7 +950,7 @@ Rather than accepting a slice – in this case of int - we might want to accept 
 >
 > Cannot have variadic first, must be last and there can be only one!
 
-# Unfurling Slices
+### Unfurling Slices
 
 If you’ve done some JS, you will have seen this!
 
