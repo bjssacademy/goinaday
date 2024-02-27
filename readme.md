@@ -1321,18 +1321,18 @@ func TestSum(t *testing.T) {
 ```
 > %d is a placeholder for a decimal integer. For string you use %s - full list at https://pkg.go.dev/fmt
 
-Now if we Run it we should see something in the console like:
+Now if we run it we should see something in the console like:
 ```
 === RUN   TestSum
 --- PASS: TestSum (0.00s)
 PASS
 ```
 
-Let's see the test fail. Update the Sum function:
+Let's see the test fail. Update the `Sum` function:
 
 ```go
 func Sum(x int, y int) int {
-	return x + y
+	return x + y + 1
 }
 ```
 
