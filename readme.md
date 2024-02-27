@@ -1160,6 +1160,261 @@ Each element of array A is a string that can have one of the following values: C
 
 # Part 8
 
+## Testing
+
+Go has a built in testing command called `go test`, and a package `testing` which combine to give a minimal but complete testing experience.
+
+The standard toolchain also includes benchmarking and statement-based code coverage. Nice!
+
+## Unit Testing
+
+Unit testing in Go is just as opinionated as any other aspect of the language like formatting or naming. The syntax deliberately avoids the use of assertions and leaves the responsibility for checking values and behaviour to the developer.
+
+Here is an example of a method we want to test in the main package. We have defined an exported function called Sum which takes in two integers and adds them together.
+
+```go
+package main
+
+func Sum(x int, y int) int {
+	return x + y
+}
+
+func main() {
+	Sum(5, 5)
+}
+```
+
+We would then write our test in a separate file – but for ease of use today, we’ll be writing it in the Playground so you can type along.
+
+Click on the [Link to Playground](https://goplay.tools/snippet/z7_DG7l_vgu) to get access to the skeleton we are going to use, and follow along as we create a basic unit test.
+
+Characteristics of a Golang test function:
+* It begins with the word Test followed by a word or phrase starting with a capital letter, which is usually the method under test. We're testing the Sum function, so we call it TestSum:
+```go
+func TestSum() {
+
+}
+```
+* The first and only parameter needs to be `t *testing.T`:
+```go
+func TestSum(t *testing.T) {
+
+}
+```
+* We’re now inside our test function, so we want to call our function under test, Sum
+```go
+func TestSum(t *testing.T) {
+  total := Sum(5, 5)
+}
+```
+* Now we need to assert our result, in Go there’s no built in assertion library - more on that later!
+```go
+func TestSum(t *testing.T) {
+  total := Sum(5, 5)
+
+  if total != 10 {
+    //uh oh!
+  }
+}
+```
+* Calls `t.Error()` or `t.Fail()` to indicate a failure (I called `t.Errorf()` to provide more details).
+```go
+func TestSum(t *testing.T) {
+  total := Sum(5, 5)
+
+  if total != 10 {
+    t.Errorf("Sum was incorrect, got: %d, want: %d", total, 10)
+    //OR
+    t.Error("Expected:", 10, "Got:", total)
+  }
+}
+```
+> %d is a placeholder for a decimal integer. For string you use %s - full list at https://pkg.go.dev/fmt
+
+Now if we Run it we should see something in the console like:
+```
+=== RUN   TestSum
+--- PASS: TestSum (0.00s)
+PASS
+```
+
+Let's see the test fail. Update the Sum function:
+
+```go
+func Sum(x int, y int) int {
+	return x + y
+}
+```
+
+Now run and you will see the error:
+
+```=== RUN   TestSum
+    prog_test.go:12: Sum was incorrect, got: 11, want: 10.
+--- FAIL: TestSum (0.00s)
+FAIL
+```
+
+[Complete code](https://goplay.tools/snippet/DD0JXs_Ma7l)
+
+### Fallthrough
+
+It's important to note that in Go, all your assertions will be run. Execution continues and unlike other testing libraries does not immediately exist unless you use `FailNow()`.
+
+### t.Fail vs t.Error vs t.FailNow
+
+When `t.Fail()` is called within a test function, it sets the test's status to "failed".
+
+`t.Error()` also marks the test as failed *but prints an error message*, `t.Fail()` simply marks the test as failed without providing any additional output.
+
+`t.FailNow()` marks the function as having failed and **stops** its execution by calling runtime.Goexit. Execution will continue at the next test.
+
+
+Completed example : https://go.dev/play/p/DD0JXs_Ma7l
+
+### Assertions
+
+You may be more used to using the Assert keyword to perform checking, but the authors of The Go Programming Language make some good arguments for Go's style over Assertions.
+
+When using assertions:
+* tests can feel like they're written in a different language (RSpec/Mocha for instance)
+* errors can be cryptic `assert: 0 == 1`
+* pages of stack traces can be generated
+* tests stop executing after the first assert fails - masking patterns of failure
+
+## Adding Tests In VS Code
+
+A couple of rules in Go:
+
+* The test file can be in a different package (and folder) or the same one (main). 
+* Must be saved in a file named with the suffix `_test.go` such as: `sum_test.go`
+
+1. Create a new folder eg `c:\users\all\go-test` and open it with VS Code
+2. Run `go mod init goinadaytesting` from the VS Code terminal
+3. Create a new main.go with the code:
+```go
+package main
+
+func Sum(x int, y int) int {
+	return x + y
+}
+
+func ComplexSum(array []int) int {
+	result := 0
+	for _, v := range array {
+		result += v
+	}
+	return result
+}
+```
+4. Create a new file `main_test.go` with the code:
+```go
+package main
+
+import "testing"
+
+func TestSum(t *testing.T) {
+  total := Sum(5, 5)
+
+  if total != 10 {
+    t.Errorf("Sum was incorrect, got: %d, want: %d", total, 10)
+    //OR
+    t.Error("Expected:", 10, "Got:", total)
+  }
+}
+```
+5. Save both files, and run from the command line with `go test -v`
+
+### Go doesn't ship your tests
+
+In addition, it may feel un-natural to leave files named `main_test.go` in the middle of your package. Rest assured that the Go compiler and linker will **not** ship your test files in any binaries it produces.
+
+### Running Tests
+
+There are a few ways to run your tests from the command line – and you can run all your tests, or specific tests for a package, or just an individual test
+
+Within the same directory as the test:
+- `go test` This picks up any files matching `packagename_test.go`
+or
+- By fully-qualified package name `go test mymodule/path/packagename` eg
+`go test github.com/alexellis/golangbasics1`
+
+> For a more verbose output type in `go test -v` and you will see the PASS/FAIL result of each test including any extra logging produced by `t.Log`.
+
+## Table Tests
+
+We can also run the same test with multiple inputs - as it would be somewhat boring to write 5 separate tests for the  `Sum` function testing different inputs.
+
+Instead we can use Table Tests, which is done by creating a slice of structs for input and ranging over the slice.
+
+Let's update our TestSum() test:
+
+```go
+func TestSum(t *testing.T) {
+	tables := []struct {
+		num1     int
+		num2     int
+		expected int
+	}{
+		{1, 1, 2},
+		{5, 2, 7},
+		{5, 5, 10},
+	}
+//..rest of code
+}
+```
+
+We have create an anonymous struct which has 3 fields - `num1`, `num2`, and `expected`, which we then immediately instantiate 3 times with values.
+
+So we have our first instance of the struct having the fields `num1=1`, `num2=1` and `expected=2`, and our second instance having `num1=5`, `num2=2`, and `expected=7`, and so on for the last one. This is out arrange part of the the test. We are arranging the data we are going to use for testing.
+
+Now we have our slice of struct - tables - we want to range over it and call the `Sum` function for each item in the slice:
+
+```go
+func TestSum(t *testing.T) {
+  //..previous code
+  for _, table := range tables {
+		total := Sum(table.num1, table.num2)
+		if total != table.expected {
+			t.Errorf("Sum of (%d+%d) was incorrect, got: %d, want:%d.", table.num1, table.num2, total, table.expected)
+		}
+	}
+}
+```
+
+So on the first iteration of the loop, we get the first item and reference it via the variable name `table`, and then we call the `Sum` function with the values stored in `table.num1` and `table.num2` field (1 and 1) and store the result in the variable `total`.
+
+We then compare the `total` value with our `table.expected` variable (2). If they are equal, we go round the loop again until we are done!
+
+Run your code with `go test -v` to see the output.
+
+## Lab - Refactor
+
+Let’s assume we want to be able to add more than 2 numbers.
+
+Add a new function `ComplexSum` to take a slice of integers in `main.go`:
+
+```go
+func ComplexSum(array []int) int {
+	result := 0
+	for _, v := range array {
+		result += v
+	}
+	return result
+}
+```
+
+* Create a new test to test the new function using a table test
+* Your struct will need to hold a slice of int rather than two separate integer fields
+* You will still need and `expected` field
+
+> If you haven't created your own code in VS Code yet, you can use the code in [this folder](/code/part9/). Just remember to run `go mod tidy` first.
+
+---
+
+# Part 9 - ADVANCED
+
+Warning - here be dragons. If you're new to programming this next section may blow your mind.
+
 ## Concurrency in Go
 
 Okay, so if you've got this far we're now getting into some of the very cool and confusing things Go does - concurrency.
@@ -1264,3 +1519,11 @@ Result: 10
  ```
 
  >NOTE: Your output is likely to be different every time you run it!
+
+ ---
+
+# Solutions
+
+[Lab 1](https://go.dev/play/p/iqtQbtsrQke)
+
+[Lab 2](https://go.dev/play/p/JE6ReThYevY)
