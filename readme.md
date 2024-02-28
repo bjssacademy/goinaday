@@ -68,7 +68,8 @@
         - [What's an interface then?](#whats-an-interface-then)
     - [Implementing Interfaces In Go](#implementing-interfaces-in-go)
     - [Structural vs Nominative Polymorphism](#structural-vs-nominative-polymorphism)
-    - [Academy Codility Test - in Go!](#academy-codility-test---in-go)
+    - [`interface{}` is a data type in Go](#interface-is-a-data-type-in-go)
+    - [Lab - Academy Codility Test - in Go!](#lab---academy-codility-test---in-go)
 - [Part 8](#part-8)
     - [Testing](#testing)
     - [Unit Testing](#unit-testing)
@@ -1228,7 +1229,40 @@ For the nerdy amongst you, Go uses *structural polymorphism* which is also known
 
 ![](img/goinaday49.png)
 
-## Academy Codility Test - in Go!
+## `interface{}` is a data type in Go
+
+Okay, you may remember we said you can't have lists of different/mixed data types, and this is why you implement an interface, so you can have a list that is the underlying type.
+
+Well in Go, you can use interface as a direct type:
+
+```go
+  var a interface{}
+
+	a = 10
+
+	fmt.Println(a)
+
+	a = "hello"
+
+	fmt.Println(a)
+```
+
+This is roughly equivalent to `any` in Typescript. I would highly caution you against using it like this though...
+
+You can also use it for slices containing mixed data types too:
+
+
+```go
+  a := []interface{}{
+		10,
+		"something",
+		19.7,
+	}
+
+	fmt.Println(a)
+```
+
+## Lab - Academy Codility Test - in Go!
 
 A hospital has five departments: Cardiology, Neurology, Orthopaedics, Gynaecology and Oncology. There are N patients, numbered from 0 to N-1, and the K-th of them is in department represented by a string A[K].
 
