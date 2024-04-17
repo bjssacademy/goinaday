@@ -478,6 +478,12 @@ This is why, in the example above that used `append`, we had to re-assign the v
 
 Here, the output is going to be `[0, 0, 0, 0, 0, 9332]`. Maybe you thought it would be `[9332, 0, 0, 0, 0]`? To a human, that might seem logical. To a compiler, you're telling it to append a value to a slice that already holds 5 values.
 
+### Stacks, Queues, Sorting & Filtering
+
+Why do we need to reslice? Well, Go doesn't have built-in `pop` or `push` for stacks like other languages, so you have to use a slice.
+
+If you want to know more, take a look at https://github.com/bjssacademy/go-stacks-queues-sort-filter
+
 ## Functions
 
 Functions are very similar to other languages. There is a keyword `func`, the name of the function `plus`, and parameters `(a int, b int)` and the return type `int`:
