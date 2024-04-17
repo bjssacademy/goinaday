@@ -699,7 +699,10 @@ Example input might be: `[10, 5, 3,100,99, 12, 9, 1, 4, 35, 21]​`
 ## Maps
 
 Maps in Go are what other languages call hashtables or dictionaries. They work as you expect: you define a key and value, and can get, set and delete values from it.
-Maps, like slices, can be created with the `make` function. 
+
+> If you are not sure what key-value pairs are, or want a more in-depth look at Mpas in Go, check out https://github.com/bjssacademy/go-maps
+
+Maps, like slices, can be created with or without the `make` function. 
 
 ![](img/goinaday27.png)
 
