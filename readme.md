@@ -26,10 +26,7 @@
     - [Structures, Methods & Pointers](#structures-methods--pointers)
         - [The Basics](#the-basics)
     - [Declarations](#declarations)
-    - [Declarations – Part 2](#declarations--part-2)
-        - [Passing By Value](#passing-by-value)
     - [Pointers](#pointers)
-- [Pointers vs Values](#pointers-vs-values)
     - [Constructors](#constructors)
     - [Methods](#methods)
     - [Quick Lab](#quick-lab)
@@ -565,8 +562,6 @@ The simplest way to create a value of our structure is below.
 
 Note: The trailing `,` in the above structure when we give it values on intialisation is required. Without it, the compiler will give an error. You'll appreciate the required consistency, especially if you've used a language or format that enforces the opposite.
 
-## Declarations – Part 2
-
 We don't have to set all or even any of the fields. Both of these are valid:
 
 ![](img/goinaday19.png)
@@ -574,26 +569,30 @@ We don't have to set all or even any of the fields. Both of these are valid:
 [Code here](https://goplay.tools/snippet/R_DWHlrQCsd)
 
 Just like unassigned variables have a zero value, so do fields.
-Furthermore, you can skip the field name and rely on the order of the field declarations (though for the sake of clarity, you should only do this for structures with few fields):
 
+Furthermore, you can skip the field name and rely on the order of the field declarations (though for the sake of clarity, you should only do this for structures with few fields).
 
-### Passing By Value
+## Pointers
 
 What all of the above examples do is declare a variable `gas` and assign a value to it.
 
-Many times though, we don't want a variable that is directly associated with our value but rather a variable that has a pointer to our value. A pointer is a memory address; it's the location of where to find the actual value. It's a level of indirection. Loosely, it's the difference between being at a house and having directions to the house.
+Many times though, we don't want a variable that is *directly* associated with our value but rather a variable that has a *pointer* to our value, that is, we don't want to have to return a value from our function, we want to be able to *alter* the original variable *without* having to return it in any way.
 
 > If you have done C, then pointers in Go *are NOT exactly the same*.
 
-Why do we want a pointer to the value, rather than the actual value? It comes down to the way Go passes arguments to a function: as copies. 
+Why do we want a pointer to the value, rather than the actual value? It comes down to the way Go passes arguments to a function: as *copies*. 
 
-Knowing this, what does the following print:
+Here's a [fuller explanation about pointers in Go and examples](https://github.com/bjssacademy/go-pointers). Go ahead and read it, we'll wait here for you.
+
+---
+
+Knowing this about pointers work in Go, and the difference in by value and by reference, what does the following print:
 
 ![](img/goinaday20.png)
 
 The answer is 9000, not 19000. Why? Because Super made changes to a *copy* of our original source value and thus, changes made in Super weren't reflected in the caller. To make this work as you probably expect, we need to pass a pointer to our value.
 
-## Pointers
+### Using Pointers In Our Code
 
 ![](img/goinaday21.png)
 
@@ -601,7 +600,7 @@ We made two changes. The first is the use of the `&` operator to get the addre
 
 Note that we're still passing a copy of `gas`’s value to `Super` it just so happens that `gas`'s value has become an address. That copy is the same address as the original, which is what that indirection buys us. Think of it as copying the directions to a restaurant. What you have is a copy, but it still points to the same restaurant as the original.
 
-# Pointers vs Values
+### Pointers vs Values
 
 As you write Go code, it's natural to ask yourself should this be a value, or a pointer to a value? 
 
