@@ -490,8 +490,6 @@ func plus(a int, b int) int {
 
 ![](img/goinaday13.png)
 
-[Code here](https://goplay.tools/snippet/lqPNF6DBVgX )
-
 You call a function exactly like you'd expect with `functionName(arguments)`.
 
 ### Functions Can Return Multiple Values
@@ -499,6 +497,8 @@ You call a function exactly like you'd expect with `functionName(arguments)`.
 This is a good time to point out that functions can return multiple values in Go:
 
 ![](img/goinaday14.png)
+
+[Code here](https://goplay.tools/snippet/lqPNF6DBVgX )
 
 When returning multiple values in Go, the return types must be enclosed in parenthesis `()`;
 
