@@ -296,11 +296,11 @@ func main() {
 	power := 1000
 	fmt.Printf("default power is %d\n", power)
 
-	name, power := "Goku", 9000
-	fmt.Printf("%s's power is over %d\n", name, power)
+	power := 9000
+	fmt.Printf("power is %d\n", power)
 }
 ```
-[Code here](https://goplay.tools/snippet/DxwHGSSZWpZ )
+[Code here](https://goplay.tools/snippet/T4dyc5tvOsQ)
 
 The compiler will complain with `no new variables on left side of :=`. This means that when we first declare a variable, we use `:=` but on subsequent assignment, we use the assignment operator `=`. This makes a lot of sense, but it can be tricky for your muscle memory to remember when to switch between the two.
 
