@@ -733,7 +733,7 @@ We can iterate over a map using a for loop combined with the `range` keyword
 
 ![](img/goinaday28.png)
 
-[Code here](https://goplay.tools/snippet/cvwftQosOvM)
+[Code here](https://goplay.tools/snippet/AXZUYbheE9M)
 
 So we have the `for` keyword, then the `key` (or index) and `value` variables that wil be assigned to on each iteration of the loop, the short assignment operator `:=`, and then the keyword `range` and our iterable (array, slice, map etc) variable `lookup`.
 
