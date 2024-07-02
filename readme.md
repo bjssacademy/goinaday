@@ -648,6 +648,8 @@ Structures don't have constructors. Instead, you create a function that returns 
 
 ![](img/goinaday24.png)
 
+[Code here](https://goplay.tools/snippet/kOwG74uAFup)
+
 Our factory doesn't have to return a pointer; this is absolutely valid:
 
 ![](img/goinaday23.png)
