@@ -589,6 +589,8 @@ Knowing this about pointers work in Go, and the difference in by value and by re
 
 ![](img/goinaday20.png)
 
+[Code here](https://goplay.tools/snippet/Bi_Z5wEz4mw)
+
 The answer is 9000, not 19000. Why? Because Super made changes to a *copy* of our original source value and thus, changes made in Super weren't reflected in the caller. To make this work as you probably expect, we need to pass a pointer to our value.
 
 ### Using Pointers In Our Code
