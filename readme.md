@@ -490,6 +490,8 @@ func plus(a int, b int) int {
 
 ![](img/goinaday13.png)
 
+[Code here](https://goplay.tools/snippet/wqP1WVtuUCi)
+
 You call a function exactly like you'd expect with `functionName(arguments)`.
 
 ### Functions Can Return Multiple Values
