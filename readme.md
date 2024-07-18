@@ -537,6 +537,8 @@ Sometimes, you only care about one of the return values. In these cases, you ass
 
 ## Structures, Methods & Pointers
 
+> If you have not come from a background that includes classes, or objects, then you may find [go structs](https://github.com/bjssacademy/go-structs) more in-depth about how structs are a custom data-type that group together related data.
+
 ### The Basics
 
 Although Go doesn't do OO like you may be used to, you'll notice a lot of similarities between the definition of a *structure* and that of a *class*. A simple example is the following `Source` structure:
