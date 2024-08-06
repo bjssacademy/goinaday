@@ -1553,3 +1553,56 @@ func ComplexSum(array []int) int {
 [Lab 1](https://go.dev/play/p/iqtQbtsrQke)
 
 [Lab 2](https://go.dev/play/p/JE6ReThYevY)
+
+# Example code
+**Part 1 - The Basics** 
+- Hello Learner - https://goplay.tools/snippet/UTfp9e_aAbd 
+- Imports - https://goplay.tools/snippet/fairSSz2PXW 
+- Standard Libraries - https://pkg.go.dev/fmt#Println 
+- Variables & Declarations - https://goplay.tools/snippet/8oQwThFogpS 
+- Variable Scope - https://goplay.tools/snippet/DxwHGSSZWpZ 
+- For Loops - https://goplay.tools/snippet/TeaO0Yxt95g 
+- Flow Control - https://goplay.tools/snippet/UA6GTDP13YG 
+- Arrays - https://goplay.tools/snippet/NIMcD_lX8q0 
+- Slices - https://goplay.tools/snippet/xcMbUbQTx8B 
+- Append - https://goplay.tools/snippet/KANWcaYws90 
+- Functions - https://goplay.tools/snippet/lqPNF6DBVgX 
+- Function Return Underscore - https://goplay.tools/snippet/MRJP8ntz47F 
+
+**Part 2 - Structures & Pointers** 
+- Declarations - https://go.dev/play/p/xOQ8J-jzB9m 
+- Declarations Part 2 - https://go.dev/play/p/R_DWHlrQCsd 
+- Pointers - https://go.dev/play/p/NNbN4NrD6PX 
+- Quick Lab - https://go.dev/play/p/YQl09jejlMl 
+- Methods - https://go.dev/play/p/Ep45Ns3yTlN 
+- Constructors - https://go.dev/play/p/Od9u57SVcaE 
+
+**Part 3 - Maps, Ranges & Errors** 
+- Maps - https://go.dev/play/p/yRUAZAjpCr7 
+- Ranges - https://go.dev/play/p/cvwftQosOvM 
+- Range Continued - https://go.dev/play/p/CzyQe5jWaC- 
+- Errors - https://go.dev/play/p/vcpKA8tPKFl 
+- Custom Errors - https://go.dev/play/p/2C2BmAlqt02 
+
+**Part 4 - Installing Go** 
+- Download - https://go.dev/dl/ 
+- VS Code Extensions - https://code.visualstudio.com/docs/languages/go 
+
+**Part 5 - Packages** 
+- Go Run - https://go.dev/doc/tutorial/getting-started 
+
+**Part 6 - Variadics, Anonymous Functions, Interfaces** 
+- Variadic Parameters - https://go.dev/play/p/07zjjtCigQX 
+- Unfurling a Slice - https://go.dev/play/p/PTfVUcbJC5R 
+- Anonymous Functions - https://go.dev/play/p/g69eS4XV4fd 
+- Currying - https://go.dev/play/p/91Zq90R1FdP 
+- Implementing Interfaces - https://go.dev/play/p/gr79VBrJW7W 
+
+**Part 7 - Concurrency** 
+- Concurrency is not parallelism - https://www.youtube.com/watch?v=oV9rvDllKEg 
+
+**Actor Model** 
+- Broken Example Code - https://go.dev/play/p/Kde0ixIJRMr 
+- Mutexes In Code - https://play.golang.org/p/NT7Gp8HMFOw 
+- Channels - https://play.golang.org/p/EyEEC_fSfjF 
+- Start and Stop - https://go.dev/play/p/H2TW2bTNItk 
