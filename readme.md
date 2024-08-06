@@ -82,7 +82,7 @@
     - [Table Tests](#table-tests)
     - [Lab - Refactor](#lab---refactor)
 - [Solutions](#solutions)
-- [Example code](#Example code)
+- [Example code](#example-code)
 
 <!-- /TOC -->
 
